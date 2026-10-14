@@ -1,0 +1,1 @@
+Kinematics344625062 motion: velocity is displacement over time. Acceleration changes velocity.

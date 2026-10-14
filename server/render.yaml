@@ -1,0 +1,40 @@
+# Render blueprint for the StudyAI backend.
+# Usage: push this repo to GitHub, then in Render → New → Blueprint → select
+# this file. Set the env vars below (never commit secrets).
+# Docs: https://render.com/docs/blueprint-spec
+services:
+  - type: web
+    name: studyai-server
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node src/server.js
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: MONGO_URI
+        sync: false # <-- set to your MongoDB Atlas connection string
+      - key: JWT_SECRET
+        generateValue: true # long random secret, stored by Render
+      - key: JWT_EXPIRES_IN
+        value: 7d
+      - key: CLIENT_URL
+        sync: false # <-- set to your Vercel URL, e.g. https://studyai.vercel.app (must match exactly, no trailing slash)
+      - key: COOKIE_SAMESITE
+        value: none # required: frontend and backend are on different origins
+      - key: COOKIE_SECURE
+        value: "true" # required with SameSite=None (Render serves HTTPS)
+      - key: AI_PROVIDER
+        value: mock
+      # Optional live AI (either works; leave unset to stay on mock fallbacks):
+      # - key: OPENAI_API_KEY
+      #   sync: false
+      # - key: OPENAI_MODEL
+      #   value: gpt-4o-mini
+      # NOTE: uploads/ is ephemeral on Render (files vanish on redeploy/restart).
+      # For durable file storage, attach a Render Disk (paid) or move to S3/R2
+      # and update storage.service.js accordingly.

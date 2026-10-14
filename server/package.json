@@ -1,0 +1,30 @@
+{
+  "name": "studyai-server",
+  "version": "0.1.0",
+  "description": "StudyAI backend - Express + MongoDB + JWT + configurable LLM provider",
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+    "dev": "node --watch src/server.js",
+    "start": "node src/server.js",
+    "seed:admin": "node src/seed/admin.seed.js",
+    "seed:superadmin": "node src/seed/superadmin.seed.js",
+    "seed:demo": "node src/seed/demo.seed.js",
+      "test": "node --test tests/unit.test.js tests/ai.test.js tests/api.test.js tests/admin.test.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.5.1",
+    "express-validator": "^7.1.0",
+    "helmet": "^7.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.4.0",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "pdf-parse": "^1.1.4"
+  }
+}
